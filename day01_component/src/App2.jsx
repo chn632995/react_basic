@@ -5,7 +5,7 @@ import Item from './Components/Item'
 
 class App extends Component {
     render(){
-        return <Item></Item>
+        return <Item next="壁立千仞无欲则刚" name="林则徐"></Item>
     }
 }
 
