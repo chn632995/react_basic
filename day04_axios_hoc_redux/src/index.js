@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // 导入根组件
-import App from "./App19";
+import App from "./App20";
 
 // 渲染视图
 ReactDOM.render(<App></App>, document.getElementById("root"));
