@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from "react";
+import { toJS } from "immutable";
 // 引入仓库对象
 import store from "../Store/index";
 class Header extends Component {
     constructor(props) {
         super(props);
         // 获取初始值
-        this.state = store.getState();
+        this.state = store.getState().toJS();
         // 订阅数据
         store.subscribe(() => {
-            this.setState(() => store.getState());
+            this.setState(() => store.getState().toJS());
         });
     }
     render() {
@@ -32,7 +33,7 @@ class Header extends Component {
                         {this.state.todo.list.map((item, index) => {
                             if (item.done) {
                                 return (
-                                    <li>
+                                    <li key={index}>
                                         <input
                                             type="checkbox"
                                             checked="checked"

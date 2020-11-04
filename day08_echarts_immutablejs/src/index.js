@@ -7,7 +7,7 @@ import {Provider} from 'react-redux'
 import store from './Store/index'
 import { HashRouter as Router} from "react-router-dom";
 // 导入根组件
-import App from "./App31";
+import App from "./TodoList/Index";
 
 // 渲染视图
 ReactDOM.render(

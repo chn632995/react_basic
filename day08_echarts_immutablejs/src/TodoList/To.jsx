@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { toJS } from "immutable";
 // 引入仓库对象
 import store from "../Store/index";
 
@@ -6,10 +7,10 @@ class To extends Component {
     constructor(props) {
         super(props);
         // 获取初始值
-        this.state = store.getState();
+        this.state = store.getState().toJS();
         // 订阅数据
         store.subscribe(() => {
-            this.setState(() => store.getState());
+            this.setState(() => store.getState().toJS());
         });
     }
 
@@ -32,7 +33,7 @@ class To extends Component {
                     </div>
                     <ol id="todolist" className="demo-box">
                         {this.state.todo.list.map((item, index) => {
-                            if(!item.done){
+                            if (!item.done) {
                                 return (
                                     <li key={index}>
                                         <input

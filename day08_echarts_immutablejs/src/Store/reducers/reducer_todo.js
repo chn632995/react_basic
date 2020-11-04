@@ -1,19 +1,27 @@
 // 创建默认的数据源（名字随意，前后一致就ok）
-const defaultState = {
+import { fromJS, Map, toJS } from "immutable";
+const defaultState = fromJS({
     // 初始数据
     list: [],
-};
+});
+console.log(defaultState);
 
 // 定义reducer（reducer名字随意，前后一致就ok）
 function reducer(state = defaultState, action) {
     // 还应该有修改state的业务代码（需要有action）才能进行
+    let newState = fromJS(state);
     if (action.type === "add") {
-        let tmp = state.list;
-        tmp.push({ done: false, title: action.payload });
-        saveState({list: tmp});
-        return {
-            list: tmp,
-        };
+        // let tmp = state.list;
+        // tmp.push({ done: false, title: action.payload });
+        // saveState({list: tmp});
+        // return {
+        //     list: tmp,
+        // };
+        newState = newState.update("list", (item) =>
+            item.push(Map({ done: false, title: action.payload }))
+        );
+        saveState(newState.toJS());
+        return newState;
     }
     // 删除
     if (action.type === "del") {
@@ -26,15 +34,15 @@ function reducer(state = defaultState, action) {
     // 切换
     if (action.type === "switch") {
         let tmp = state.list;
-        state.list.map((item,index) => {
-            if(index === action.payload){
+        state.list.map((item, index) => {
+            if (index === action.payload) {
                 tmp[index].done = !tmp[index].done;
             }
-        })
+        });
         saveState({ list: tmp });
         return {
-            list: tmp
-        }
+            list: tmp,
+        };
     }
     // 返回state
     return loadState();
